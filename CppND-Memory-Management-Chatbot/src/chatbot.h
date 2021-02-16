@@ -69,6 +69,7 @@ public:
             
             _chatLogic = other._chatLogic;
             _rootNode = other._rootNode;
+            _currentNode = other._currentNode;
 //             *_image = other.*_image;
 			_image = new wxBitmap();
             *_image = *other._image;
