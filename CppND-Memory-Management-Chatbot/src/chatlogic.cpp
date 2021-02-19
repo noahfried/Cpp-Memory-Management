@@ -143,7 +143,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
                             AddAllTokensToElement("ANSWER", tokens, **newNode);
                         }
 
-                        ChatBot chatbot("../images/chatbot.png");
 
                       	////
                         //// EOF STUDENT CODE
@@ -202,7 +201,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
     //// STUDENT CODE
     ////
-
+    ChatBot chatbot("../images/chatbot.png");
     // identify root node
     GraphNode *rootNode = nullptr;
     for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
@@ -223,8 +222,8 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
 
     // add chatbot to graph root node
-    _chatBot->SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(_chatBot);
+    chatbot.SetRootNode(rootNode);
+    rootNode->MoveChatbotHere(chatbot);
     
     ////
     //// EOF STUDENT CODE
