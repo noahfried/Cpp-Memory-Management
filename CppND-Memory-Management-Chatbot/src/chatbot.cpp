@@ -44,7 +44,64 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
-
+ChatBot::ChatBot (const ChatBot &other){
+		std::cout << "ChatBot Copy Constructor" << std::endl;
+        _chatLogic = other._chatLogic;
+        _rootNode = other._rootNode;
+        if (_image != nullptr){
+        	delete _image;
+        }
+        _image = new wxBitmap();
+        *_image = *other._image;
+        _chatLogic->SetChatbotHandle(this);
+}
+ChatBot::ChatBot (const ChatBot &&other){
+		std::cout << 'ChatBot Move Constructor' << std::endl;
+        _image = other._image;
+  		_currentNode = other._currentNode;
+        _rootNode = other._rootNode;
+  		_chatLogic = other._chatLogic;
+  		_chatLogic->SetChatbotHandle(this);
+  		delete[] other._image;
+  		delete[] other._currentNode;
+  		delete[] other._rootNode;
+  		delete[] other._chatLogic;
+}
+ChatBot& ChatBot::operator=(const ChatBot &other) {
+    	std::cout << 'ChatBot Copy Assignment Operator' << std::endl;
+        if (this != &other) {
+          delete[] other._chatLogic;
+          delete[] other._rootNode;
+//           delete[] *other._image;
+//           std::copy(other._chatLogic, other._rootNode, *other._image);
+		_currentNode = other._currentNode;
+        _rootNode = other._rootNode;
+        _chatLogic = other._chatLogic;
+        _chatLogic->SetChatbotHandle(this);
+        _image = new wxBitmap();
+        *_image = *other._image;
+        }
+        return *this;
+    }
+ChatBot& ChatBot::operator=(const ChatBot &&other) {
+    	std::cout << 'ChatBot Move Assignment Operator' << std::endl;
+    	if (this != &other) {
+        	delete[] _chatLogic;
+            delete[] _rootNode;
+//             delete[] *_image;
+            
+            _chatLogic = other._chatLogic;
+            _chatLogic->SetChatbotHandle(this);
+            _rootNode = other._rootNode;
+            _currentNode = other._currentNode;
+			_image = new wxBitmap();
+            *_image = *other._image;
+            
+            delete[] other._chatLogic;
+            delete[] other._rootNode;
+            delete[] other._image;
+        }
+    }
 ////
 //// EOF STUDENT CODE
 
